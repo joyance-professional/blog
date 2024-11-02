@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>统一身份认证 - 南河工业大学</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .desktop-bg {
+            display: none;
+        }
+
+        @media screen and (min-width: 1024px) {
+            body {
+                background: #f0f2f5;
+            }
+            
+            .desktop-bg {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 50%;
+                height: 100%;
+                background: #1890ff;
+                z-index: -1;
+            }
+
+            .main-wrapper {
+                display: flex;
+                width: 1000px;
+                background: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+            }
+
+            .banner {
+                display: block;
+                width: 500px;
+                padding: 40px;
+                background: #1890ff;
+                color: white;
+            }
+
+            .banner h2 {
+                font-size: 32px;
+                margin-bottom: 20px;
+            }
+
+            .banner p {
+                font-size: 16px;
+                line-height: 1.8;
+                opacity: 0.9;
+            }
+
+            .login-container {
+                margin-bottom: 0;
+                box-shadow: none;
+            }
+        }
+
+        .login-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            height: 60px;
+            margin-bottom: 15px;
+        }
+
+        .logo h1 {
+            color: #003366;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo p {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #1890ff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(24,144,255,0.2);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #1890ff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #40a9ff;
+            box-shadow: 0 4px 12px rgba(24,144,255,0.3);
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+
+        .options a {
+            color: #1890ff;
+            text-decoration: none;
+        }
+
+        .options a:hover {
+            color: #40a9ff;
+        }
+
+        .notice {
+            background: #fffbe6;
+            border: 1px solid #ffe58f;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #d48806;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .global-footer {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .language-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .language-switch select {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #666;
+            background: white;
+        }
+
+        .browser-icons {
+            margin-top: 10px;
+        }
+
+        .browser-icons span {
+            margin: 0 5px;
+            color: #999;
+        }
+
+        @media screen and (max-width: 1023px) {
+            .main-wrapper {
+                width: 90%;
+                max-width: 400px;
+            }
+            
+            .banner {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="desktop-bg"></div>
+    <div class="language-switch">
+        <select id="language">
+            <option value="zh">简体中文</option>
+            <option value="en">English</option>
+        </select>
+    </div>
+
+    <div class="main-wrapper">
+        <div class="banner">
+            <h2>南河工业大学</h2>
+            <p>南河工业大学创建于1952年，是一所国家"双一流"建设高校，教育部直属全国重点大学。学校秉承"明德厚学，经世致用"的校训，培养了大批杰出人才。</p>
+            <p style="margin-top: 20px">信息化服务平台为全校师生提供统一身份认证、教务系统、图书馆、邮件系统等多种信息化服务。</p>
+        </div>
+
+        <div class="login-container">
+            <div class="logo">
+                <h1>南河工业大学</h1>
+                <p>统一身份认证平台</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" name="username" placeholder="学号/工号/教工邮箱" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" name="password" placeholder="统一身份认证密码" required>
+                </div>
+                <div class="options">
+                    <label><input type="checkbox" name="remember"> 记住用户名</label>
+                    <a href="#">忘记密码？</a>
+                </div>
+                <button type="submit" class="submit-btn">登录</button>
+            </form>
+            <div class="notice">
+                <p>通知：系统将于今日23:00-次日04:00进行例行维护，请合理安排使用时间。</p>
+            </div>
+            <div class="footer">
+                <p>推荐使用以下浏览器访问</p>
+                <div class="browser-icons">
+                    <span>Chrome</span> |
+                    <span>Firefox</span> |
+                    <span>Edge</span> |
+                    <span>Safari</span>
+                </div>
+                <p>技术支持：信息化与网络安全中心</p>
+                <p>服务热线：0451-8876543</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="global-footer">
+        <p>南河工业大学 版权所有</p>
+        <p>地址：黑龙江省哈尔滨市南岗区文明路1399号 邮编：150001</p>
+        <p><a href="#" style="color: #666; text-decoration: none;">黑ICP备20240123号-1</a> | <a href="#" style="color: #666; text-decoration: none;">公安备案号 23010302000189</a></p>
+        <p>© 2024 Nanhe University of Technology. All rights reserved.</p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            
+            if(username && password) {
+                alert('系统维护中，预计04:00恢复正常。\n如有紧急情况，请拨打技术支持热线：0451-8876543');
+            }
+        });
+
+        document.getElementById('language').addEventListener('change', function(e) {
+            alert('系统维护期间暂不支持切换语言。\nLanguage switching is not available during system maintenance.');
+        });
+    </script>
+</body>
+</html>
