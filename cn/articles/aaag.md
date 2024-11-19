@@ -1,5 +1,5 @@
 ---
-title: "关于隐私"
+title: "不全面信息就是误导"
 date: "2024-8-15"
 tags: ["观点"]
 language: "cn"
