@@ -1,7 +1,7 @@
 ---
 title: "如何保护隐私"
 date: "2024-8-13"
-tags: ["观点"]
+tags: ["方法"]
 language: "cn"
 ---
 
